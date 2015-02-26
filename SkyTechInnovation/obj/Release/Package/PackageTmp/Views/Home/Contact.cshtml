@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+@*<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>*@
+
+<address>
+
+</address>
+<div class="row">
+    <h4 class="control-label" style="color:red">Unfortunately, the payment page is still being built. We'll contact you in short after your enquiry. Thanks</h4>
+</div>
+<br />
+<br />
+<div role="form" class="form-horizontal col-sm-7">
+    <div class="form-group">
+        <div>
+            <label class="col-sm-1 control-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Name" placeholder="Name" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="col-sm-1 control-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="Email" placeholder="Email" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="col-sm-1 control-label">Phone</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Phone" placeholder="Phone" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="col-sm-1 control-label">Enquiry</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="Enquiry" placeholder="Enquiry" rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button class="btn btn-primary" id="EnquiryButton" style="width: 100%">Enquiry</button>
+        </div>
+    </div>
+</div>
+
+<img src="~/Pics/Contact.jpg" class="col-sm-5" />
+
+<br class="col-sm-5" />
+<br class="col-sm-5" />
+<br class="col-sm-5" />
+<br class="col-sm-5" />
+<br class="col-sm-5" />
+<br class="col-sm-5" />
+<br class="col-sm-5" />
+
+<div id="loading" style="background-color: white; opacity:0.4; width:100%; height:100%;  position:fixed; left:0; top:0; z-index:100">
+    <img src="~/Pics/loading.gif" style="z-index:1000; left:35%; top:30%; position:fixed" />
+</div>
+
+@*<img src="~/Pics/Contact.jpg" style="left:50%; top:23%; position:absolute; z-index:1;"/>*@
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Enquiry is sent</h4>
+            </div>
+            <div class="modal-body">
+                <p>Enquiry is sent successfully</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@*<button class="btn btn-primary" id="testButton">test</button>*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#loading').hide();
+
+        $(document).ajaxStart(function () {
+            $('#loading').show();
+        })
+        $(document).ajaxStop(function () {
+            $('#loading').hide();
+        })
+
+        //$('#testButton').click(function () {
+        //    testModal();
+        //})
+
+
+        $('#EnquiryButton').click(function () {
+            var serverAddress = getLocalPath();
+            //console.log(window.location.host);
+            serverAddress = "http://" + window.location.host;
+            var webMethod = serverAddress + "/WebServices/WebService.asmx/SendEnquiryEmail";
+            var dataToPass = "{ 'name':'" + $('#Name').val() + "', " + "'email': '" + $('#Email').val() + "', " + "'phone': '" + $('#Phone').val() + "', " + "'enquiry': '" + $('#Enquiry').val() + "' }";
+            console.log(dataToPass);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: webMethod,
+                data: dataToPass,
+                success: function (msg) {
+                    //alert("Working!!");
+                    console.log(msg.d);
+                    showModal();
+                    clearForm();
+                    //alert(msg.d);
+                },
+                error: function (e) {
+                    console.log(webMethod);
+                    //alert(webMethod);
+                }
+            });
+
+            //
+        })
+    })
+
+    function clearForm() {
+        $('#Name').val('');
+        $('#Email').val('');
+        $('#Phone').val('');
+        $('#Enquiry').val('');
+    }
+
+    function showModal() {
+        $('#myModal').modal({ show: true, keyboard: true });
+    }
+
+    function getLocalPath() {
+        //console.log(window.location.origin);
+        return window.location.origin;
+    }
+</script>

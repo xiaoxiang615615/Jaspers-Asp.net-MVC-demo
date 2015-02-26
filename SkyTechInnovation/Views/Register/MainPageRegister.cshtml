@@ -1,0 +1,26 @@
+﻿
+@if (ViewBag.currentUser == "test")
+{
+     <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="#" >You are the admin!</a>
+        </li>
+    </ul>
+}
+else if (ViewBag.currentUser != null)
+{
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="#">Hello @ViewBag.currentuser !</a>
+    </li>
+</ul>
+}
+
+
+else 
+{
+<ul class="nav navbar-nav navbar-right">
+    <li>@Html.ActionLink("Register", "RegisterDetail", "Register")</li>
+    @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+</ul>
+}

@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Product Browse";
+}
+
+<br />
+@{
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="navbar-default navbar-static-side" role="navigation" >
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                       
+                        </li>
+                        <li>
+                            <a href="~/Product/BrowseDJI"><i class="fa fa-wrench fa-fw"></i> DJI</a>
+                        </li>
+                        <li>
+                            <a href="~/Product/BrowseDIY"><i class="fa fa-wrench fa-fw"></i> DIY</a>
+                        </li>
+                    </ul>
+                    <!-- /#side-menu -->
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+        </div>
+
+    <div class="col-sm-9">
+        <div class="row">
+            @{int counter = 0;}
+            @foreach (var item in ViewData["productsToShow"] as List<SkyTechInnovation.Models.ProductBrowse>)
+            {
+                <div class="col-sm-6 col-md-4">
+                    <a href="~/Product/Detail/@item.Id">
+                        <div class="thumbnail">
+                            <img src=@item.ImgPath alt="" style="width : 200px; height:160px">
+                            <div class="caption">
+                                <h4 style="text-align:center">@item.Name</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                counter++;
+                if (counter % 3 == 0)
+                {
+                    <p> &nbsp; </p>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+            </div>
+            <div class="col-sm-2">
+                <ul class="pagination pagination-sm">
+                    <li><a href="~/Product/Browse/@ViewBag.previousPage">&laquo;</a></li>
+                    @foreach (var item in ViewData["pages"] as List<SkyTechInnovation.Models.Page>)
+                    {
+                        if (@item.active == true)
+                        {
+                            <li class="active"><a href="~/Product/Browse/@item.page">@item.page</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/Product/Browse/@item.page">@item.page</a></li>
+                        }
+                    }
+                    <li><a href="~/Product/Browse/@ViewBag.nextPage">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+                <br />
+
+    <br />
+    
+  
+}
+
+

@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "ProductControlBrowse";
+    var grid = new WebGrid(source: Model, defaultSort: "Name", rowsPerPage: 12, selectionFieldName: "selectedRow");
+}
+
+<div class="row-fluid">
+    <div id="grid" style="overflow: auto;" class="span8 offset2">
+        @grid.Table(
+                         tableStyle: "table table-striped table-hover table-bordered",
+
+
+                columns: grid.Columns(
+
+                             grid.Column("Id", "Id"),
+                             grid.Column("Name", "Name"),
+                             grid.Column("ImgPath", "ImgPath"),
+                             grid.Column(format: @<text>@Html.ActionLink("Edit", "ProductEdit", new { id = @item.Id }, new { @class = "btn btn-primary btn-xs" })@Html.Raw(" ")@Html.ActionLink("Delete", "ProductDelete", new { id = @item.Id }, new { @class = "btn btn-primary btn-xs" })</text>)
+                             )
+     
+
+
+                    )
+    </div>
+</div>
+
+<br />
+<a class="btn btn-primary btn-sm" href="~/Product/CreateProduct">Create</a> 
+<br />
+
+<div class="">
+    @grid.PagerList(mode: WebGridPagerModes.All)
+</div>
+
+
+
+
+

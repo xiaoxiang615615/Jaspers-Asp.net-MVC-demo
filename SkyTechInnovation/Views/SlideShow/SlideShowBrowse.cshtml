@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "SlideShowBrowse";
+    var grid = new WebGrid(source: Model, defaultSort: "Id", rowsPerPage: 10, selectionFieldName: "selectedRow");
+}
+
+<div class="row-fluid">
+    <div id="grid" style="overflow: auto;" class="span8 offset2">
+        @grid.Table(
+                tableStyle: "table table-striped table-hover",
+
+
+                columns: grid.Columns(
+                             grid.Column("Id", "Id"),
+                             grid.Column("Path", "Path"),
+                             grid.Column(format: @<text>@Html.ActionLink("Edit", "SlideShowControl", new { id = @item.Id }, new { @class = "btn btn-primary btn-xs" })</text>)
+                             )
+           )
+    </div>
+</div>
+

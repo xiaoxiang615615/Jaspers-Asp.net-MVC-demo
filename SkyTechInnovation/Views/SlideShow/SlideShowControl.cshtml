@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "SlideShowControl";
+}
+<br />
+<br />
+
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <div>
+            <label class="col-sm-1 control-label">Id: </label>@ViewBag.Id
+            <br />
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="col-sm-1 control-label" for="file">Pic:</label>
+            <input type="file" class="form-control" id="file" name="file" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-1">
+            <input type="submit" class="btn btn-primary" id="SubmitButton" value="Submit" />
+        </div>
+        <div class="col-sm-1">
+            <a href="~/Slideshow/slideshowbrowse" class="btn btn-primary" id="CancelButton">Cancel</a>
+        </div>
+    </div>
+</form>
+
+
+
+<br />
+<br />

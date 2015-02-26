@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "RegisterDetail";
+}
+<br />
+<form role="form" class="form-horizontal">
+    <div class="form-group">
+        <div >
+            <label class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Username" placeholder="Username" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="Password" placeholder="Password" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="Email" placeholder="Email" />
+            </div>
+        </div>
+    </div>
+   
+</form>
+
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-1">
+        <button class="btn btn-primary" id="CreateButton">Create</button>
+    </div>
+    <div class="col-sm-1">
+        <button class="btn btn-primary" id="CancelButton">Cancel</button>
+    </div>
+</div>
+
+<br />
+<br />
+
+<script type="text/javascript">
+    $('#CreateButton').click(function () {
+        var userName = $('#Username').val();
+        var passWord = $('#Password').val();
+        var email = $('#Email').val();
+        var form = $('<form action="' + "/Register/processRegister" + '" method="post">' +
+        '<input type="hidden" name="userName" value="' + userName + '" />' +
+        '<input type="hidden" name="passWord" value="' + passWord + '" />' +
+         '<input type="hidden" name="email" value="'+email+'" />'+
+        '</form>');
+        $('body').append(form);
+        $(form).submit();
+
+        //var userName = $('#Username').val();
+        //var passWord = $('#Password').val();
+        //var email = $('#Email').val();
+        //$.post('/Register/processRegister', { userName: userName, passWord: passWord, email: email });
+    })
+
+</script>
+
+
+<script type="text/javascript">
+    $('#ButtonTest').click(function () {
+        //alert("working!!!");
+        $.post("/Home/About", { test: 'test1' }).done(function () {
+            window.location = "http://localhost:51500/Home/About";
+        });
+    })
+</script>
+
+

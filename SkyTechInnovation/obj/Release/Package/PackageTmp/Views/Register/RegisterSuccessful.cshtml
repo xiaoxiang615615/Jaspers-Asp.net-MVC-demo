@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "RegisterSuccessful";
+}
+
+
+
+<h2>RegisterSuccessful</h2>
+
+<input type="submit" id="ButtonTest" class="btn btn-primary" />
+
+<script type="text/javascript">
+    $('#ButtonTest').click(function () {
+        //alert("working!!!");
+        $.post("/Home/About", { test: 'test1' }).done(function () {
+            window.location = "http://localhost:51500/Home/About";
+        });
+    })
+</script>
